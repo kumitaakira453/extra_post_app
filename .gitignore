@@ -1,0 +1,86 @@
+# Python related files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.cover
+*.log
+*.pot
+*.py,cover
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Poetry
+poetry.lock
+.cache/
+
+# Virtualenvs (if using virtualenvs created by Poetry)
+.virtualenvs/
+
+# Django related files
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Django migrations
+**/migrations/*
+!**/migrations/__init__.py
+
+# Media and static files
+media/
+staticfiles/
+
+# Django cache and debug files
+*.swp
+*.swo
+*.swn
+*.sws
+*.swt
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Bandit
+.bandit
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Poetry-generated virtual environments
+# If Poetry creates virtual environments within the project folder, uncomment the following line:
+# .venv/
+
+# Logs and debug info
+*.log
+*.bak
+*.swp
+
+# Environment variables
+.env
+.env.*
