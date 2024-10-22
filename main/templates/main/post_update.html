@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block header %}{% endblock %}
+{% block content %}
+<div>
+    <h1 class="h1 m-auto mt-5 text-center fs-1">投稿編集</h1>
+    <form action="" method="POST" class="container-ml w-50 m-auto mt-5" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ form.title }}
+            {{ form.title.errors }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.content }}
+            {{ form.content.errors }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.image }}
+            {{ form.image.errors }}
+        </div>
+
+        <button type="submit" class="btn btn-success w-100 mt-4">保存</button>
+    </form>
+    <div style="margin:auto;width:100% ;display:flex; justify-content:center;">
+        <a href="{% url "index" %}" type="submit" class="btn btn-outline-secondary w-50 mt-4 m-auto">戻る</a>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}
+{% block extra_js %}{% endblock %}

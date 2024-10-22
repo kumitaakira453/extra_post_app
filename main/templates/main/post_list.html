@@ -1,0 +1,114 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block header %}{% endblock %}
+{% block content %}
+
+<h1 class="h1 m-auto mt-5 text-center fs-1"></h1>
+<div class="container d-flex flex-row flex-wrap" style="width:82vw;row-gap:20px;column-gap:1vw;margin:auto;">
+    {% for post in posts %}
+    <div class="card d-block" style="width:26vw;">
+        <img src="{% if post.image and post.image.url %}{{post.image.url}}{% else %}{% static "main/image/default_post_image.jpeg" %}{% endif　%}"
+            class="card-img-top" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+            <h5 class="card-title">{{post.title}}</h5>
+            <p class="card-text" style="height:50px;overflow-y:hidden;max-height:50px">{{post.content}}</p>
+            <div class="d-flex flex-row justify-content-start align-items-center">
+                <img src="{% if post.posted_by.icon and post.posted_by.icon.url %}{{post.posted_by.icon.url}}{% else %}{% static "main/image/default_user_icon.png" %}{% endif %}"
+                    alt="" style="width:40px;height:40px;object-fit:cover;border-radius:100%">
+                <p style="margin:auto 20px auto 10px">
+                    {{post.posted_by.username}}
+                </p>
+                <span
+                    class="material-symbols-outlined {% if user.is_authenticated %}favorite_icon{% endif %} {% if user.is_authenticated and post.is_favorited_by_user %}active{% endif %}"
+                    data-post-id="{{post.id}}" style="margin:auto 0px auto 10px;transform:translateY(2px)">
+                    favorite
+                </span>
+                <p class="favorite_count" data-post-id="{{post.id}}" style="margin:auto 20px auto 10px;">
+                    {{post.favorite_count}}
+                </p>
+                <a href={% url "post_detail" post.id %} class="material-symbols-outlined m-2"
+                    style="text-decoration:none;">
+                    open_in_new
+                </a>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <style>
+        .favorite_icon {
+            &.active {
+                color: red;
+            }
+        }
+
+    </style>
+</div>
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
+{% block extra_js %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const favoriteIcons = document.querySelectorAll(".favorite_icon");
+        const favoriteCounts = document.querySelectorAll(".favorite_count");
+        favoriteIcons.forEach((favoriteIcon) => {
+            favoriteIcon.addEventListener("click", () => {
+                const postId = favoriteIcon.dataset.postId;
+                console.log(postId);
+                const url = "/favorite/"
+                console.log(url)
+                fetch(url, {
+                        method: "POST",
+                        body: `post_id=${postId}`,
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+                            "X-CSRFToken": "{{ csrf_token }}",
+                        },
+                    })
+                    .then((response) => {
+                        return response.json();
+                    })
+                    .then((response) => {
+                        console.log(response);
+                        if (favoriteIcon.classList.contains("active")) {
+                            favoriteIcon.classList.remove("active")
+                            favoriteCounts.forEach((favoriteCount) => {
+                                if (favoriteCount.dataset.postId === postId) {
+                                    const currentFavoriteCount = parseInt(
+                                        favoriteCount.textContent
+                                    )
+                                    console.log(currentFavoriteCount)
+                                    if (currentFavoriteCount === 0) {
+                                        return;
+                                    } else {
+                                        favoriteCount.textContent = String(
+                                            currentFavoriteCount - 1)
+                                    }
+                                }
+                            })
+                        } else {
+                            favoriteIcon.classList.add("active")
+                            favoriteCounts.forEach((favoriteCount) => {
+                                if (favoriteCount.dataset.postId === postId) {
+                                    const currentFavoriteCount = parseInt(
+                                        favoriteCount.textContent
+                                    )
+                                    console.log(currentFavoriteCount)
+                                    favoriteCount.textContent = String(
+                                        currentFavoriteCount + 1)
+                                }
+                            })
+                        }
+
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            });
+        });
+    });
+
+</script>
+{% endblock %}
