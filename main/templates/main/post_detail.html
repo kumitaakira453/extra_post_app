@@ -1,5 +1,30 @@
 {% extends 'main/base.html' %}
 {% load static %}
+{% block extra_head %}
+<!-- OGP のタイトル -->
+<meta property="og:title" content="{{post.title}} [Alubum2022]">
+<!-- OGP の詳細説明 -->
+<meta property="og:description" content="{{post.content　|slice:":89" }}...">
+<!-- OGP の画像 -->
+<meta property="og:image"
+    content="{% if post.image and post.image.url %}{{post.image.url}}{% else %}{% static "main/image/default_post_image.jpeg" %}{% endif %}">
+<!-- OGP に表記される URL -->
+<meta property="og:url" content="" id="og-url">
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 現在のURLを取得
+        const fullUrl = window.location.href;
+
+        // OGPメタタグを取得
+        const ogUrlMetaTag = document.getElementById("og-url");
+
+        // OGPメタタグのcontent属性を更新
+        ogUrlMetaTag.setAttribute("content", fullUrl);
+    });
+
+</script>
+{% endblock %}
 {% block header %}{% endblock %}
 {% block content %}
 
