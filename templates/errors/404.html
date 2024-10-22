@@ -1,0 +1,52 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block head_title %}block404 - ページが見つかりません{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="error-template">
+        <h1>404</h1>
+        <h2>ページが見つかりません</h2>
+        <div class="error-details">
+            <p>申し訳ありませんが、ご希望のページは見つかりませんでした。</p>
+        </div>
+        <div class="error-actions">
+            <a href="{% url "index" %}" class="btn btn-primary btn-lg">ホームに戻る</a>
+            <a href="#" class="btn btn-secondary btn-lg">お問い合わせ</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        /* セカンダリーカラー */
+        color: #343a40;
+        /* ダークテキスト */
+    }
+
+    .error-template {
+        text-align: center;
+        padding: 100px 15px;
+    }
+
+    .error-template h1 {
+        font-size: 100px;
+        font-weight: bold;
+        color: #007bff;
+        /* セカンダリーカラーを指定 */
+    }
+
+    .error-template h2 {
+        font-size: 30px;
+        color: #6c757d;
+        /* グレー */
+    }
+
+    .error-template .btn {
+        margin-top: 20px;
+    }
+
+</style>
+{% endblock %}
+{% block footer %}{% endblock %}
