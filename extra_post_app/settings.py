@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "main",
+    "django.contrib.sites",
+    "django.contrib.sitemaps",
 ]
 
 MIDDLEWARE = [
@@ -134,3 +136,6 @@ AUTH_USER_MODEL = "main.user"
 LOGIN_URL = "login"  ### 追加
 LOGIN_REDIRECT_URL = "index"  ### 追加
 LOGOUT_REDIRECT_URL = "index"  ### 追加
+
+
+SITE_ID = 1

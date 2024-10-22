@@ -19,10 +19,19 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static  # 追加
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
+
+from .sitemaps import BlogPostSitemap, StaticViewSitemap
+
+sitemaps = {
+    "blog": BlogPostSitemap,
+    "static": StaticViewSitemap,
+}
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("main.urls")),
+    path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap"),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
