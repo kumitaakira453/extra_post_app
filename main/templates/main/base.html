@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            {% block head_title %}Alubum2022{% endblock %}
+            {% block head_title %}Album2022{% endblock %}
         </title>
         <link rel="icon" type="image/png" href="{% static 'main/image/logo.png' %}">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -19,7 +19,7 @@
 
     <body>
         <div class="navbar navbar-expand-sm navbar-dark bg-secondary px-2 d-flex align-items-center">
-            <a class="navbar-brand fw-bold ms-4" href="{% url 'index' %}" style="color:white;">Alubum2022</a>
+            <a class="navbar-brand fw-bold ms-4" href="{% url 'index' %}" style="color:white;">Album2022</a>
             <form class="d-flex" role="search" action="{% url 'index' %}" method="GET">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="key">
                 <button class="btn btn-secondary search_btn p-0 d-flex align-items-center" type="submit">

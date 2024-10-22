@@ -10,9 +10,8 @@ from django.views import generic
 from .forms import LoginForm, PostCreateForm, SignUpForm, UserInfoUpdateForm
 from .models import Favorite, Post
 
+
 # Create your views here.
-
-
 class LoginView(auth_views.LoginView):
     authentication_form = LoginForm  # ログイン用のフォームを指定
     template_name = "main/login.html"  # テンプレートを指定
