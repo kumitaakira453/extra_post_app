@@ -36,3 +36,7 @@ class Favorite(models.Model):
     post = models.ForeignKey(
         Post, on_delete=models.CASCADE, related_name="favorited_by_users"
     )
+
+    class Meta:
+        verbose_name = "いいね"
+        verbose_name_plural = "いいね"
