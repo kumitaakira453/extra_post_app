@@ -4,6 +4,10 @@ from django.db import models
 
 class User(AbstractUser):
     icon = models.ImageField(upload_to="user_icons", blank=True, null=True)
+    email = models.EmailField(max_length=255, unique=True)
+
+    USERNAME_FIELD = "email"  # ☆2 このテーブルのレコードを一意に識別
+    REQUIRED_FIELDS = ["username"]  # スーパーユーザ作成時に入力する
 
     def __str__(self):
         return f"{self.username}"

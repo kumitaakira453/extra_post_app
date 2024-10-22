@@ -17,6 +17,11 @@ class LoginView(auth_views.LoginView):
     authentication_form = LoginForm  # ログイン用のフォームを指定
     template_name = "main/login.html"  # テンプレートを指定
 
+    def form_invalid(self, form):
+        response = super().form_invalid(form)
+        print(form)
+        return response
+
 
 class LogoutView(auth_views.LogoutView):
     pass

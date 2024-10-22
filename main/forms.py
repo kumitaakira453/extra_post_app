@@ -7,9 +7,13 @@ from .models import Post, User
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # 各フィールドにクラスを追加する
-        self.fields["username"].widget.attrs.update({"class": "form-control"})
-        self.fields["password"].widget.attrs.update({"class": "form-control"})
+
+        self.fields["username"].widget.attrs.update(
+            {"class": "form-control", "placeholder": "メールアドレス"}
+        )
+        self.fields["password"].widget.attrs.update(
+            {"class": "form-control", "placeholder": "パスワード"}
+        )
 
 
 class SignUpForm(UserCreationForm):
